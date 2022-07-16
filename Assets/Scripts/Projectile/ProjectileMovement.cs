@@ -6,16 +6,22 @@ public class ProjectileMovement : MonoBehaviour
 {
 	[SerializeField] private Projectile projectile;
 	[SerializeField] private float speed = 10f;
+	[SerializeField] private ParticleSystem crash;
+	[SerializeField] private new MeshRenderer renderer;
+	
+	private bool isDestroyed = false;
 	
 	private void Update()
 	{
 		Transform target = projectile.Target;
 		
+		if(isDestroyed == true) return;
 		if(target == null)
 		{
 			Destroy(gameObject);
 			return;
 		}
+		
 		
 		Vector3 direction = target.position - transform.position;
 		float distance = speed * Time.deltaTime;
@@ -30,6 +36,9 @@ public class ProjectileMovement : MonoBehaviour
 	private void HitTarget(GameObject target)
 	{
 		Debug.Log($"We hit {target.name}");
-		Destroy(gameObject);
+		crash.Play();
+		isDestroyed = true;
+		renderer.enabled = false;
+		Destroy(gameObject, crash.main.startLifetime.constant); // delay destroy until particle system ends.
 	}
 }

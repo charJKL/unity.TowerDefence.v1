@@ -1,55 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class TurretShoot : MonoBehaviour
 {
-	[SerializeField] private float range = 15f;
-	[SerializeField] private float speed = 5f;
+	[SerializeField] private Projectile projectile;
+	[SerializeField] private Transform barrel;
+	[SerializeField] private TurretTargeting targeting;
 	
-	public float Range { get => range; }
+	[SerializeField] private float fireRate = 1f;
 	
-	const string ENEMY_TAG = "Enemy";
-	private Transform target;
-	
-	private void Start()
-	{
-		target = null;
-		InvokeRepeating("FindTarget", 0f, .5f);
-	}
+	private float timer;
 	
 	private void Update()
 	{
-		if(target == null) return;
-		
-		Vector3 direction = target.position - transform.position;
-		Vector3 rotationAroundYAxis = new Vector3(direction.x, 0, direction.z);
-		Quaternion lookRotation = Quaternion.LookRotation(rotationAroundYAxis);
-		Quaternion lookAngleToMove = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * speed);
-		transform.rotation = lookAngleToMove;
-	}
-	
-	private void FindTarget()
-	{
-		GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
-		(GameObject enemy, float distance) = FindNearestEnemy(enemies);
-		target = (enemy != null && distance < range) ? enemy.transform : null;
-	}
-	
-	private (GameObject, float) FindNearestEnemy(GameObject[] enemies)
-	{
-		(GameObject, float) nearest = (null, Mathf.Infinity);
-		
-		foreach(GameObject enemy in enemies)
+		timer += Time.deltaTime;
+		if(targeting.Target == null) return;
+		if(timer > fireRate) // TODO this logic has bugs, we can shoot so fast that we shoud spawn 2 projectiles in one frame.
 		{
-			float distance = Vector3.Distance(transform.position, enemy.transform.position);
-			if(distance < nearest.Item2)
-			{
-				nearest.Item1 = enemy;
-				nearest.Item2 = distance;
-			}
+			Shoot(targeting.Target.transform);
+			timer = 0;
 		}
-		return nearest;
+	}
+	
+	private void Shoot(Transform target)
+	{
+		projectile.Init(barrel.position, target);
 	}
 }

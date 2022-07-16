@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 80568997569474511}
-  - component: {fileID: -5126731024625616646}
-  - component: {fileID: -3067781991020873914}
+  - component: {fileID: 4254297433280062312}
+  - component: {fileID: 2154891604988842225}
+  - component: {fileID: 4258015775369286401}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5126731024625616646
+--- !u!114 &4254297433280062312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,7 +50,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 15
   speed: 5
---- !u!114 &-3067781991020873914
+--- !u!114 &2154891604988842225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561215328616153577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8a73c9c1155e44492421c5677cf931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 3620202023751057483, guid: c5309d4c4a6e418458a4d76387beb25f, type: 3}
+  barrel: {fileID: 578159456163625349}
+  targeting: {fileID: 4254297433280062312}
+  fireRate: 1
+--- !u!114 &4258015775369286401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc5428d5f8917f54aa426a0d83ef5489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretShoot: {fileID: -5126731024625616646}
+  turretTargeting: {fileID: 4254297433280062312}
 --- !u!1 &5319162797183830421
 GameObject:
   m_ObjectHideFlags: 0

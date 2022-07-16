@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Turret))]
 public class TurretRangeGizmo : MonoBehaviour
 {
-	[SerializeField] private TurretTargeting turretTargeting;
-	
- 	void OnDrawGizmosSelected()
+	void OnDrawGizmosSelected()
 	{
+		Turret turret = GetComponent<Turret>();
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, turretTargeting.Range); 
+		Gizmos.DrawWireSphere(transform.position, turret.Range);
 	}
 }

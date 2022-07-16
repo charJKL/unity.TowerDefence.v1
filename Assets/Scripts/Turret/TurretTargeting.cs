@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Turret))]
 public class TurretTargeting : MonoBehaviour
 {
-	[SerializeField] private float range = 15f;
-	[SerializeField] private float speed = 5f;
-	
-	public float Range { get => range; }
-	public Transform Target{ get=> target; }
+	[SerializeField] private Transform head;
 	
 	const string ENEMY_TAG = "Enemy";
+	private float rotateSpeed = 10f;
 	private Transform target;
+	
+	public Transform Target { get => target; }
 	
 	private void Start()
 	{
@@ -24,18 +21,18 @@ public class TurretTargeting : MonoBehaviour
 	{
 		if(target == null) return;
 		
-		Vector3 direction = target.position - transform.position;
+		Vector3 direction = target.position - head.position;
 		Vector3 rotationAroundYAxis = new Vector3(direction.x, 0, direction.z);
 		Quaternion lookRotation = Quaternion.LookRotation(rotationAroundYAxis);
-		Quaternion lookAngleToMove = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * speed);
-		transform.rotation = lookAngleToMove;
+		Quaternion lookAngleToMove = Quaternion.Lerp(head.rotation, lookRotation, Time.deltaTime * rotateSpeed);
+		head.rotation = lookAngleToMove;
 	}
 	
 	private void FindTarget()
 	{
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 		(GameObject enemy, float distance) = FindNearestEnemy(enemies);
-		target = (enemy != null && distance < range) ? enemy.transform : null;
+		target = (enemy != null && distance < rotateSpeed) ? enemy.transform : null;
 	}
 	
 	private (GameObject, float) FindNearestEnemy(GameObject[] enemies)

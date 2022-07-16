@@ -172,4 +172,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   construction: {fileID: 0}
   basement: {fileID: 2070959173721602936}
-  turret: {fileID: -3152273256309375451, guid: a9d55e11df7b0dc4290d7d18f6ccc0c9, type: 3}
+  turret: {fileID: 7645081906617687337, guid: a9d55e11df7b0dc4290d7d18f6ccc0c9, type: 3}

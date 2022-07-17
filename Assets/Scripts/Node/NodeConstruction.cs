@@ -10,6 +10,8 @@ public class NodeConstruction : MonoBehaviour
 	
 	private GameObject construction;
 	
+	public Transform Basement { get => basement; }
+	
 	void OnMouseDown()
 	{
 		if(EventSystem.current.IsPointerOverGameObject()) return; // TODO this is ugly hack. // TODO also name is misleading https://docs.unity3d.com/Packages/com.unity.ugui@1.0/api/UnityEngine.EventSystems.EventSystem.html
@@ -19,9 +21,10 @@ public class NodeConstruction : MonoBehaviour
 			Debug.Log("Something is already build here");
 			return;
 		}
-		
-		Turret selected = constructionManager.GetSelectedTurret();
-		if(selected == null) return;
-		construction = selected.Init(basement.position);
+		if(constructionManager.IsTurretSelected())
+		{
+			construction = constructionManager.Build(basement.position);
+			construction.transform.parent = gameObject.transform;
+		}
 	}
 }

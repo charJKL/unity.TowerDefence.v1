@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class ConstructionManager : MonoBehaviour
 {
-	private Turret selection;
+	private TurretRecord selection;
 	
 	public Turret GetSelectedTurret()
 	{
-		return selection;
+		return selection.Turret;
 	}
 	
-	public void SelectTurret(Turret turret)
+	public void SelectTurret(TurretRecord turret)
 	{
 		selection = turret;
+	}
+	
+	public bool IsTurretSelected()
+	{
+		return selection.Turret != null;
+	}
+	
+	public GameObject Build(Vector3 position)
+	{
+		return selection.Turret.Init(position);
 	}
 }

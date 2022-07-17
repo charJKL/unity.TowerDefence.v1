@@ -1822,8 +1822,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   constructionManager: {fileID: 946591904}
-  turretGun: {fileID: 7645081906617687337, guid: a9d55e11df7b0dc4290d7d18f6ccc0c9, type: 3}
-  turretLauncher: {fileID: 7645081906617687337, guid: f9ec6cfa417e7934eb275af888de80f2, type: 3}
+  turretGun:
+    turret: {fileID: 7645081906617687337, guid: a9d55e11df7b0dc4290d7d18f6ccc0c9, type: 3}
+    cost: 100
+  turretLauncher:
+    turret: {fileID: 7645081906617687337, guid: f9ec6cfa417e7934eb275af888de80f2, type: 3}
+    cost: 200
 --- !u!1001 &599503364
 PrefabInstance:
   m_ObjectHideFlags: 0

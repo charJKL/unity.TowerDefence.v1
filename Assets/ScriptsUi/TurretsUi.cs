@@ -5,8 +5,8 @@ using UnityEngine;
 public class TurretsUi : MonoBehaviour
 {
 	[SerializeField] private ConstructionManager constructionManager;
-	[SerializeField] private Turret turretGun;
-	[SerializeField] private Turret turretLauncher;
+	[SerializeField] private TurretRecord turretGun;
+	[SerializeField] private TurretRecord turretLauncher;
 	
 	
 	public void SelectTurretGun()

@@ -5,9 +5,10 @@ using UnityEngine.EventSystems;
 
 public class NodeConstruction : MonoBehaviour
 {
-	[SerializeField] private GameObject construction;
+	[SerializeField] private ConstructionManager constructionManager;
 	[SerializeField] private Transform basement;
-	[SerializeField] private Turret turret;
+	
+	private GameObject construction;
 	
 	void OnMouseDown()
 	{
@@ -18,7 +19,7 @@ public class NodeConstruction : MonoBehaviour
 			Debug.Log("Something is already build here");
 			return;
 		}
-		
-		construction = turret.Init(basement.position);
+
+		construction = constructionManager.GetSelectedTurret().Init(basement.position);
 	}
 }

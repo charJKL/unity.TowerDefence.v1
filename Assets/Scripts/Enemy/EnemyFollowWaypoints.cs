@@ -8,7 +8,7 @@ public class EnemyFollowWaypoints : MonoBehaviour
 	
 	private Waypoints waypoints;
 	private int targetIndex;
-	private const float ARRIVE_THRESHOLD = 0.2f;
+	private const float ARRIVE_THRESHOLD = 0.5f;
 	
 	public void SetWaypoints(Waypoints waypoints)
 	{
@@ -23,8 +23,7 @@ public class EnemyFollowWaypoints : MonoBehaviour
 		if(target == null) return;
 		Vector3 direction = GetDirection(transform.position, target.position);
 						direction.y = 0; // remove movement in y axis
-		transform.Translate(direction * speed * Time.deltaTime);
-		
+		transform.Translate(direction.normalized * speed * Time.deltaTime);
 		if(IsTargetReached(transform.position, target.position)) MoveToNextWaypoint();
 	}
 	

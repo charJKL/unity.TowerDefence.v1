@@ -49,6 +49,12 @@ public class CameraMovement : MonoBehaviour
 		if(mousePosition.y < border) borderPosition |= BorderPosition.Bottom;
 		if(mousePosition.x < border) borderPosition |= BorderPosition.Left;
 		
+		// check if cursor is out of playmode window
+		if(mousePosition.x < 0) return BorderPosition.None;
+		if(mousePosition.y < 0) return BorderPosition.None;
+		if(mousePosition.x > Screen.width) return BorderPosition.None;
+		if(mousePosition.y > Screen.height) return BorderPosition.None;
+		
 		return borderPosition;
 	}
 	

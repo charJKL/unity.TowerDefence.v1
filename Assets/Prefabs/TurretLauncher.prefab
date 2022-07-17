@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 20
-  shootintRate: 2
+  shootintRate: 3
 --- !u!114 &759973499181517816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8a73c9c1155e44492421c5677cf931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 3620202023751057483, guid: c5309d4c4a6e418458a4d76387beb25f, type: 3}
+  projectile: {fileID: 3620202023751057483, guid: edb102cb90751a849a2cfc22a76b987a, type: 3}
   barrel: {fileID: 6601140125406697674}
 --- !u!1 &7192839443576409098
 GameObject:

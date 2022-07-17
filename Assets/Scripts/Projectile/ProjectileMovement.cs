@@ -2,43 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Projectile))]
 public class ProjectileMovement : MonoBehaviour
 {
-	[SerializeField] private Projectile projectile;
-	[SerializeField] private float speed = 10f;
-	[SerializeField] private ParticleSystem crash;
-	[SerializeField] private new MeshRenderer renderer;
+	private Projectile projectile;
 	
-	private bool isDestroyed = false;
+	private void Awake()
+	{
+		projectile = GetComponent<Projectile>();
+	}
 	
-	private void Update()
+	private void FixedUpdate()
 	{
 		Transform target = projectile.Target;
 		
-		if(isDestroyed == true) return;
 		if(target == null)
 		{
 			Destroy(gameObject);
 			return;
 		}
 		
-		
 		Vector3 direction = target.position - transform.position;
-		float distance = speed * Time.deltaTime;
-		if(direction.magnitude < distance) // TODO why do not use physic collision?
-		{
-			HitTarget(target.gameObject);
-			return;
-		}
-		transform.Translate(direction.normalized * distance, Space.World); // TODO movement should be done in FixedUpdate
-	}
-	
-	private void HitTarget(GameObject target)
-	{
-		Debug.Log($"We hit {target.name}");
-		crash.Play();
-		isDestroyed = true;
-		renderer.enabled = false;
-		Destroy(gameObject, crash.main.startLifetime.constant); // delay destroy until particle system ends.
+		transform.Translate(direction.normalized * projectile.Speed * Time.deltaTime, Space.World); // TODO movement should be done in FixedUpdate
+		transform.LookAt(target);
 	}
 }

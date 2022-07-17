@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6624072377446591490}
   - component: {fileID: 43211822928137264}
   - component: {fileID: 7431565323036972254}
+  - component: {fileID: 8773655317368367517}
   m_Layer: 0
-  m_Name: CrashVfx
+  m_Name: ExplosionShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +51,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4870,3 +4871,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8773655317368367517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438621790305085060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0191eed2a6f8484ea9a973a696ed8c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

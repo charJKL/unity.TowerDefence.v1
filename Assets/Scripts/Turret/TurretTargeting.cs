@@ -6,10 +6,16 @@ public class TurretTargeting : MonoBehaviour
 	[SerializeField] private Transform head;
 	
 	const string ENEMY_TAG = "Enemy";
-	private float rotateSpeed = 10f;
+	private Turret turret;
 	private Transform target;
+	private float rotateSpeed = 10f;
 	
 	public Transform Target { get => target; }
+	
+	private void Awake()
+	{
+		turret = GetComponent<Turret>();
+	}
 	
 	private void Start()
 	{
@@ -32,7 +38,7 @@ public class TurretTargeting : MonoBehaviour
 	{
 		GameObject[] enemies = GameObject.FindGameObjectsWithTag(ENEMY_TAG);
 		(GameObject enemy, float distance) = FindNearestEnemy(enemies);
-		target = (enemy != null && distance < rotateSpeed) ? enemy.transform : null;
+		target = (enemy != null && distance < turret.Range) ? enemy.transform : null;
 	}
 	
 	private (GameObject, float) FindNearestEnemy(GameObject[] enemies)

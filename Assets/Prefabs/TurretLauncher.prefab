@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 20
-  shootintRate: 0.5
+  shootintRate: 2
 --- !u!114 &759973499181517816
 MonoBehaviour:
   m_ObjectHideFlags: 0

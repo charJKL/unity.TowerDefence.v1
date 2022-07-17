@@ -19,7 +19,9 @@ public class NodeConstruction : MonoBehaviour
 			Debug.Log("Something is already build here");
 			return;
 		}
-
-		construction = constructionManager.GetSelectedTurret().Init(basement.position);
+		
+		Turret selected = constructionManager.GetSelectedTurret();
+		if(selected == null) return;
+		construction = selected.Init(basement.position);
 	}
 }

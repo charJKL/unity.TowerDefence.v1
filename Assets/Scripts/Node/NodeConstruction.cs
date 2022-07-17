@@ -24,7 +24,10 @@ public class NodeConstruction : MonoBehaviour
 		if(constructionManager.IsTurretSelected())
 		{
 			construction = constructionManager.Build(basement.position);
-			construction.transform.parent = gameObject.transform;
+			if(construction)
+			{
+				construction.transform.parent = gameObject.transform;
+			}
 		}
 	}
 }

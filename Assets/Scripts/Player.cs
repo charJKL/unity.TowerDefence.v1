@@ -1,25 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-	[SerializeField] private float startMoney = 500;
+	[Header("References:")]
+	[SerializeField] private StatusUi statusUi;
+	
+	[Header("Options:")]
+	[SerializeField] private float startMoney = 150;
 	[SerializeField] private float money;
+	
+	public Action<float> OnMoneyChanged;
+	public float Money { get => money; }
 	
 	private void Start()
 	{
-		money = startMoney;
+		OnMoneyChanged += (amount) => statusUi.SetMoney(amount);
+		SetMoney(startMoney);
 	}
 
+	private void SetMoney(float amount)
+	{
+		money += amount;
+		OnMoneyChanged?.Invoke(money);
+	}
+	
 	public bool HaveEnoughtMoney(float amount)
 	{
 		return amount <= money;
 	}
-	
+
 	public void Buy(float amount)
 	{
-		money -= amount;
+		SetMoney(amount);
 	}
-
 }

@@ -30,7 +30,7 @@ public class ConstructionManager : MonoBehaviour
 			Debug.Log($"You don't have enought money");
 			return null;
 		}
-		player.Buy(selection.Cost);
+		player.Buy(-selection.Cost);
 		return selection.Turret.Init(position);
 	}
 }

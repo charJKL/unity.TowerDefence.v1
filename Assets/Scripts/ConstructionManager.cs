@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class ConstructionManager : MonoBehaviour
@@ -7,15 +6,18 @@ public class ConstructionManager : MonoBehaviour
 	[SerializeField] private Player player;
 	
 	private TurretRecord selection;
+	public Action<TurretRecord> OnInsufficientFund;
+	public Action<TurretRecord> OnSelectionChanged;
 	
 	public Turret GetSelectedTurret()
 	{
 		return selection.Turret;
 	}
 	
-	public void SelectTurret(TurretRecord turret)
+	public void SelectTurret(TurretRecord turretRecord)
 	{
-		selection = turret;
+		selection = turretRecord;
+		OnSelectionChanged?.Invoke(turretRecord);
 	}
 	
 	public bool IsTurretSelected()
@@ -27,7 +29,7 @@ public class ConstructionManager : MonoBehaviour
 	{
 		if(player.HaveEnoughtMoney(selection.Cost) == false)
 		{
-			Debug.Log($"You don't have enought money");
+			OnInsufficientFund?.Invoke(selection);
 			return null;
 		}
 		player.Buy(-selection.Cost);

@@ -8,7 +8,9 @@ public class TurretSelectionUi : MonoBehaviour
 {
 	[Header("References to ui:")]
 	[SerializeField] private Image image;
-	[SerializeField] private TextMeshProUGUI cost;
+	[SerializeField] private Image costPanel;
+	[SerializeField] private TextMeshProUGUI costText;
+	[SerializeField] private Image selected;
 	[SerializeField] private Animator insufficientFund;
 	
 	[Header("Options:")]
@@ -16,16 +18,18 @@ public class TurretSelectionUi : MonoBehaviour
 	
 	const string INSUFFICIENT_FUND_TRIGGER = "InsufficientFund";
 	private Button button;
-	private Color idle;
+	private Color imageIdleColor;
+	private Color costPanelIdleColor;
 	
 	private void Awake()
 	{
-		idle = image.color;
+		imageIdleColor = image.color;
+		costPanelIdleColor = costPanel.color;
 	}
 	
 	public void SetCost(float amount)
 	{
-		cost.SetText($"${amount}");
+		costText.SetText($"${amount}");
 	}
 	
 	public void InsufficientFund()
@@ -35,17 +39,12 @@ public class TurretSelectionUi : MonoBehaviour
 	
 	public void CanAfford(bool canAfford)
 	{
-		switch(canAfford)
-		{
-			case true:
-				cost.color = Color.black;
-				image.color = idle;
-				break;
-				
-			case false:
-				cost.color = Color.red;
-				image.color = insufficientColor;
-				break;
-		}
+		image.color = canAfford ? imageIdleColor : insufficientColor;
+		costPanel.color = canAfford ? costPanelIdleColor : insufficientColor;
+	}
+	
+	public void IsSelected(bool isSelected)
+	{
+		selected.gameObject.SetActive(isSelected);
 	}
 }

@@ -9,20 +9,32 @@ public class Player : MonoBehaviour
 	[Header("Options:")]
 	[SerializeField] private float startMoney = 150;
 	[SerializeField] private float money;
+	[SerializeField] private int startLives = 5;
+	[SerializeField] private int lives;
 	
 	public Action<float> OnMoneyChanged;
+	public Action<int> OnLivesChanged;
 	public float Money { get => money; }
+	public float Lives { get => lives; }
 	
 	private void Start()
 	{
 		OnMoneyChanged += (amount) => statusUi.SetMoney(amount);
+		OnLivesChanged += (lives) => statusUi.SetLives(lives);
 		SetMoney(startMoney);
+		SetLives(startLives);
 	}
 
-	private void SetMoney(float amount)
+	private void SetMoney(float money)
 	{
-		money += amount;
-		OnMoneyChanged?.Invoke(money);
+		this.money += money;
+		OnMoneyChanged?.Invoke(this.money);
+	}
+	
+	public void SetLives(int lives)
+	{
+		this.lives += lives;
+		OnLivesChanged?.Invoke(this.lives);
 	}
 	
 	public bool HaveEnoughtMoney(float amount)

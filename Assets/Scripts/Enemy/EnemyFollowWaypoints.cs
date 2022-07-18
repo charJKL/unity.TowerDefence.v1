@@ -1,14 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyFollowWaypoints : MonoBehaviour
 {
-	[SerializeField] private float speed = 5f;
-	
+	private Enemy enemy;
 	private Waypoints waypoints;
 	private int targetIndex;
 	private const float ARRIVE_THRESHOLD = 0.5f;
+	
+	public Action OnArrivedToEnd;
+	
+	private void Awake()
+	{
+		enemy = GetComponent<Enemy>();
+	}
 	
 	public void SetWaypoints(Waypoints waypoints)
 	{
@@ -23,7 +29,7 @@ public class EnemyFollowWaypoints : MonoBehaviour
 		if(target == null) return;
 		Vector3 direction = GetDirection(transform.position, target.position);
 						direction.y = 0; // remove movement in y axis
-		transform.Translate(direction.normalized * speed * Time.deltaTime);
+		transform.Translate(direction.normalized * enemy.Speed * Time.deltaTime);
 		if(IsTargetReached(transform.position, target.position)) MoveToNextWaypoint();
 	}
 	
@@ -49,6 +55,7 @@ public class EnemyFollowWaypoints : MonoBehaviour
 		targetIndex++;
 		if(targetIndex >= waypoints.Count)
 		{
+			OnArrivedToEnd?.Invoke();
 			Destroy(gameObject);
 		}
 	}

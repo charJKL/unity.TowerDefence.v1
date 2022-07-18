@@ -1,14 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public void Init(Vector3 position, Waypoints waypoints)
+	[SerializeField] private float maxHealth;
+	[SerializeField] private float currentHealth;
+	[SerializeField] private float speed;
+	
+	public float Speed { get => speed; }
+	public float Health { get => currentHealth; }
+	
+	public GameObject Init(Vector3 position, Waypoints waypoints)
 	{
-		GameObject enemy = Instantiate(gameObject, position, Quaternion.identity);
+		GameObject instance = Instantiate(gameObject, position, Quaternion.identity);
 		
-		EnemyFollowWaypoints enemyFollowWaypoints = enemy.GetComponent<EnemyFollowWaypoints>();
+		EnemyFollowWaypoints enemyFollowWaypoints = instance.GetComponent<EnemyFollowWaypoints>();
 		enemyFollowWaypoints.SetWaypoints(waypoints);
+		
+		return instance;
+	}
+	
+	public void Start()
+	{
+		currentHealth = maxHealth;
 	}
 }

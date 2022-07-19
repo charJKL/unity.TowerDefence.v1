@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Projectile))]
 public class ProjectileExplosion : MonoBehaviour
 {
-	[SerializeField] private GameObject explosion;
+	[SerializeField] private VFX explosion;
 	
 	const int LAYER_ENEMY = 1 << 6;
 	private Projectile projectile;
@@ -21,7 +21,7 @@ public class ProjectileExplosion : MonoBehaviour
 	{
 		if(other.transform == projectile.Target)
 		{
-			if(explosion) Instantiate(explosion, transform.position, Quaternion.identity);
+			if(explosion) explosion.Init(transform.position);
 			Collider[] colliders = Physics.OverlapSphere(other.transform.position, projectile.Range, LAYER_ENEMY);
 			foreach(Collider collider in colliders)
 			{

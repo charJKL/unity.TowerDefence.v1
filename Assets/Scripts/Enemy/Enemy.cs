@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private float speed;
 	
 	public float Speed { get => speed; }
-	public float Health { get => currentHealth; }
+	public float MaxHealth{ get => maxHealth; }
+	public float Health { get => currentHealth; set => currentHealth = value; }
 	
 	public GameObject Init(Vector3 position, Waypoints waypoints)
 	{

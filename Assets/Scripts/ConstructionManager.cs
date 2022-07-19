@@ -32,7 +32,7 @@ public class ConstructionManager : MonoBehaviour
 			OnInsufficientFund?.Invoke(selection);
 			return null;
 		}
-		player.Buy(-selection.Cost);
+		player.Buy(selection.Cost);
 		return selection.Turret.Init(position);
 	}
 }

@@ -15,6 +15,6 @@ public class StatusUi : MonoBehaviour
 	
 	public void SetMoney(float amount)
 	{
-		moneyText.SetText($"Money: {amount}");
+		moneyText.SetText($"Money: ${amount}");
 	}
 }

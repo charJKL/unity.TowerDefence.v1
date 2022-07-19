@@ -25,7 +25,9 @@ public class ProjectileExplosion : MonoBehaviour
 			Collider[] colliders = Physics.OverlapSphere(other.transform.position, projectile.Range, LAYER_ENEMY);
 			foreach(Collider collider in colliders)
 			{
-				Destroy(collider.gameObject);
+				EnemyHealth enemy = collider.GetComponent<EnemyHealth>();
+				if(enemy == null) continue;
+				enemy.TakeDamage(150);
 			}
 			Destroy(gameObject);
 		}

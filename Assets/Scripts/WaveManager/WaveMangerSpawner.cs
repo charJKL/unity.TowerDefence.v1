@@ -55,7 +55,13 @@ public class WaveMangerSpawner : MonoBehaviour
 	private void SpawnEnemy()
 	{
 		GameObject instance = enemy.Init(start.position, waypoints);
+		instance.GetComponent<EnemyHealth>().OnDeath += EnemyWasKilled;
 		instance.GetComponent<EnemyFollowWaypoints>().OnArrivedToEnd += EnemyPassedEntirePath;
+	}
+	
+	private void EnemyWasKilled()
+	{
+		player.AddMoney(100);
 	}
 	
 	private void EnemyPassedEntirePath()

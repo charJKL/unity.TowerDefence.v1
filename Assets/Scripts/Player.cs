@@ -27,8 +27,8 @@ public class Player : MonoBehaviour
 
 	private void SetMoney(float money)
 	{
-		this.money += money;
-		OnMoneyChanged?.Invoke(this.money);
+		this.money = money;
+		OnMoneyChanged?.Invoke(money);
 	}
 	
 	public void SetLives(int lives)
@@ -44,6 +44,11 @@ public class Player : MonoBehaviour
 
 	public void Buy(float amount)
 	{
-		SetMoney(amount);
+		SetMoney(money - amount);
+	}
+	
+	public void AddMoney(float amount)
+	{
+		SetMoney(money + amount);
 	}
 }

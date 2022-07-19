@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 7645081906617687337}
   - component: {fileID: 759973499181517816}
   - component: {fileID: 2756980350554732563}
-  - component: {fileID: 8157072008462051392}
+  - component: {fileID: 3914046213675350113}
   m_Layer: 0
   m_Name: TurretLaser
   m_TagString: Untagged
@@ -376,8 +376,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665540a7940aa7c43bd8a4d02d896359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 14
-  shootintRate: 2
+  range: 10
+  shootingRate: 1
+  shootingDuration: 3
 --- !u!114 &759973499181517816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   head: {fileID: 3682717072113866173}
---- !u!114 &8157072008462051392
+--- !u!114 &3914046213675350113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -412,10 +413,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4561215328616153577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea8a73c9c1155e44492421c5677cf931, type: 3}
+  m_Script: {fileID: 11500000, guid: 51258157332b6044f8a7bb02c06f8847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 3620202023751057483, guid: edb102cb90751a849a2cfc22a76b987a, type: 3}
+  projectileBeam: {fileID: 825180147850480633, guid: 434755a6ec113ef41ad1c01d6e0ecf50, type: 3}
   barrel: {fileID: 7530392917683316165}
 --- !u!1 &4853179843160738750
 GameObject:

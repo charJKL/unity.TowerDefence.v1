@@ -5918,7 +5918,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statusUi: {fileID: 510096393}
-  startMoney: 350
+  startMoney: 300
   money: 0
   startLives: 5
   lives: 0

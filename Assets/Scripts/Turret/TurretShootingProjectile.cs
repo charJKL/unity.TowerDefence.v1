@@ -2,14 +2,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(Turret))]
 [RequireComponent(typeof(TurretTargeting))]
-public class TurretShooting : MonoBehaviour
+public class TurretShootingProjectile : MonoBehaviour
 {
 	[SerializeField] private Projectile projectile;
 	[SerializeField] private Transform barrel;
 	
 	private Turret turret;
 	private TurretTargeting targeting;
-	private float timer;
+	private float timeout;
 	
 	private void Awake()
 	{
@@ -19,12 +19,12 @@ public class TurretShooting : MonoBehaviour
 	
 	private void Update()
 	{
-		timer += Time.deltaTime;
+		timeout -= Time.deltaTime;
 		if(targeting.Target == null) return;
-		if(timer > turret.ShootintRate) // TODO this logic has bugs, we can shoot so fast that we shoud spawn 2 projectiles in one frame.
+		if(timeout <= 0)
 		{
 			Shoot(targeting.Target.transform);
-			timer = 0;
+			timeout = turret.ShootingRate;
 		}
 	}
 	

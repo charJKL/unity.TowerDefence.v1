@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Enemy))]
 public class EnemyHealth : MonoBehaviour
 {
+	[SerializeField] private VFX deathVFX;
+	
 	private Enemy enemy;
 	
 	public Action OnDeath;
@@ -24,6 +26,7 @@ public class EnemyHealth : MonoBehaviour
 	private void Death()
 	{
 		OnDeath?.Invoke();
+		deathVFX.Init(transform.position);
 		Destroy(gameObject);
 	}
 }

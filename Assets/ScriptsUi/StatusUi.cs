@@ -5,12 +5,12 @@ using TMPro;
 
 public class StatusUi : MonoBehaviour
 {
-	[SerializeField] private TextMeshProUGUI livesText;
+	[SerializeField] private LivesUi livesUi;
 	[SerializeField] private TextMeshProUGUI moneyText;
 	
 	public void SetLives(int lives)
 	{
-		livesText.SetText($"Lives: {lives}");
+		livesUi.SetLives(lives);
 	}
 	
 	public void SetMoney(float amount)

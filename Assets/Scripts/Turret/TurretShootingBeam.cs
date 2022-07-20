@@ -30,15 +30,24 @@ public class TurretShootingBeam : MonoBehaviour
 	
 	private void Update()
 	{
-		if(isBeamEnabled) timeoutDuration = Mathf.Clamp(timeoutDuration - Time.deltaTime, 0, turret.ShootingDuration);
-		else timeoutDuration = Mathf.Clamp(timeoutDuration + Time.deltaTime, 0, turret.ShootingDuration);
-		
-		if(isOverheated == false && timeoutDuration > 0.1 && targeting.Target) EnableBeam(targeting.Target);
-		if(targeting.Target == null) DisableBeam();
-		if(timeoutDuration <= 0) 
+		// TODO if target changes during shooting, bug (artifact) will show up: you will be shooting diffrent enemy than targeting,
+		// proper way to solve it will be implementing new way of targeting.
+		switch(isBeamEnabled)
 		{
-			DisableBeam();
-			EnableOverheated();
+			case false:
+				timeoutDuration = Mathf.Clamp(timeoutDuration + Time.deltaTime, 0, turret.ShootingDuration);
+				if(isOverheated == false && timeoutDuration > 0.1 && targeting.Target) EnableBeam(targeting.Target);
+				break;
+				
+			case true:
+				timeoutDuration = Mathf.Clamp(timeoutDuration - Time.deltaTime, 0, turret.ShootingDuration);
+				if(targeting.Target == null) DisableBeam();
+				if(timeoutDuration <= 0) 
+				{
+					DisableBeam();
+					EnableOverheated();
+				}
+				break;
 		}
 	}
 	
@@ -64,5 +73,6 @@ public class TurretShootingBeam : MonoBehaviour
 	{
 		isBeamEnabled = false;
 		beam.Disable();
+		beam.SetTarget(null);
 	}
 }

@@ -1,27 +1,12 @@
 using UnityEngine;
 
-public class Debug2
-{
-	static public void Point(Vector3 position)
-	{
-		Vector3 start = position + Vector3.up;
-		Debug.DrawLine(start, position, Color.red, 5f);
-	}
-	
-	static public void Direction(Vector3 position, Vector3 direction)
-	{
-		Vector3 end = position + direction.normalized;
-		Vector3 mark = end + Vector3.up * .5f;
-		Debug.DrawLine(position, end, Color.red, 5f);
-		Debug.DrawLine(mark, end, Color.red, 5f);
-	}
-	
-}
+
 
 [RequireComponent(typeof(LineRenderer))]
 public class ProjectileBeam : MonoBehaviour
 {
 	[SerializeField] private ParticleSystem vfx;
+	[SerializeField] private new GameObject light;
 	
 	private Transform barrel;
 	private Transform target;
@@ -32,7 +17,6 @@ public class ProjectileBeam : MonoBehaviour
 	private void Awake()
 	{
 		line = GetComponent<LineRenderer>();
-		vfx.Play();
 	}
 	
 	public ProjectileBeam Init(Transform transform)
@@ -46,6 +30,7 @@ public class ProjectileBeam : MonoBehaviour
 	
 	private void Update()
 	{
+		if(target == null) return;
 		line.SetPosition(0, barrel.position);
 		line.SetPosition(1, target.position);
 		
@@ -53,7 +38,9 @@ public class ProjectileBeam : MonoBehaviour
 		Vector3 point = target.position + direction.normalized;
 		vfx.transform.position = point;
 		vfx.transform.rotation = Quaternion.LookRotation(direction);
-		Debug2.Point(point);
+		
+		EnemyHealth enemy = target.GetComponent<EnemyHealth>();
+		//if(enemy) enemy.TakeDamage(2);
 	}
 	
 	public void SetBarrel(Transform transform)
@@ -69,12 +56,17 @@ public class ProjectileBeam : MonoBehaviour
 	public void Enable()
 	{
 		gameObject.SetActive(true);
+		Debug.Log("Enable");
+		light.SetActive(true);
+		vfx.Play();
 		
 	}
 	
 	public void Disable()
 	{
+		light.SetActive(false);
+		vfx.Stop();
 		gameObject.SetActive(false);
-		//vfx.Stop();
+		Debug.Log("Disable");
 	}
 }

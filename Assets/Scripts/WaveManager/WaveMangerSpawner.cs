@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -18,6 +19,7 @@ public class WaveMangerSpawner : MonoBehaviour
 	
 	const int PENALTY_FROM_PASSED_ENEMY = -1;
 	private int waveIndex;
+	public Action<int> OnWaveCompleted;
 	
 	private void Start()
 	{
@@ -32,6 +34,7 @@ public class WaveMangerSpawner : MonoBehaviour
 			int enemies = waves[waveIndex];
 			yield return StartCoroutine(SpawnEnemies(enemies));
 			
+			OnWaveCompleted?.Invoke(waveIndex);
 			waveIndex++;
 			if(waveIndex >= waves.Length) yield break;
 			

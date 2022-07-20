@@ -40,7 +40,7 @@ public class ProjectileBeam : MonoBehaviour
 		vfx.transform.rotation = Quaternion.LookRotation(direction);
 		
 		EnemyHealth enemy = target.GetComponent<EnemyHealth>();
-		//if(enemy) enemy.TakeDamage(2);
+		if(enemy) enemy.TakeDamage(2 * Time.deltaTime);
 	}
 	
 	public void SetBarrel(Transform transform)
@@ -56,10 +56,8 @@ public class ProjectileBeam : MonoBehaviour
 	public void Enable()
 	{
 		gameObject.SetActive(true);
-		Debug.Log("Enable");
 		light.SetActive(true);
 		vfx.Play();
-		
 	}
 	
 	public void Disable()
@@ -67,6 +65,5 @@ public class ProjectileBeam : MonoBehaviour
 		light.SetActive(false);
 		vfx.Stop();
 		gameObject.SetActive(false);
-		Debug.Log("Disable");
 	}
 }

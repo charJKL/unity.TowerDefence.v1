@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +21,11 @@ public class uiTurret : MonoBehaviour
 	
 	public void SetPosition(Vector3 position)
 	{
-		Debug.Log($"Move to position ${position}");
+		transform.position = new Vector3(position.x, transform.position.y, position.z + 3f);
+	}
+	
+	private void LateUpdate()
+	{
+		transform.LookAt(transform.position + Camera.main.transform.forward);
 	}
 }

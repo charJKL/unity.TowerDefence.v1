@@ -11,7 +11,7 @@ public class NodeInteraction : MonoBehaviour
 	private Node node;
 	private Material idleMaterial;
 	
-	public Action<NodeInteraction> OnSelected;
+	public Action<NodeInteraction> OnClicked;
 	public Action<NodeInteraction> OnEnter;
 	
 	private void Awake()
@@ -29,7 +29,7 @@ public class NodeInteraction : MonoBehaviour
 	private void OnMouseDown()
 	{
 		if(EventSystem.current.IsPointerOverGameObject()) return; // TODO this is ugly hack. // TODO also name is misleading https://docs.unity3d.com/Packages/com.unity.ugui@1.0/api/UnityEngine.EventSystems.EventSystem.html
-		OnSelected?.Invoke(this);
+		OnClicked?.Invoke(this);
 	}
 	
 	private void OnMouseEnter()

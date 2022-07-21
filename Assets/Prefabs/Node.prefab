@@ -156,4 +156,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3be003f23c2b5489aec7ba2eff5955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightMaterial: {fileID: 2100000, guid: 42311d5073f7f3e4f9732d909bd3e5f0, type: 2}
+  hoverHighlightMaterial: {fileID: 2100000, guid: 42311d5073f7f3e4f9732d909bd3e5f0, type: 2}
+  selectHighlightMaterial: {fileID: 2100000, guid: 1fa86fb1912ddfc4c8ac1b71f40078a4, type: 2}

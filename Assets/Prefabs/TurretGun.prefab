@@ -240,6 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 80568997569474511}
   - component: {fileID: 7645081906617687337}
+  - component: {fileID: -9074778074333302092}
   - component: {fileID: 759973499181517816}
   - component: {fileID: 2756980350554732563}
   - component: {fileID: 8157072008462051392}
@@ -282,6 +283,19 @@ MonoBehaviour:
   range: 8
   shootingRate: 1
   shootingDuration: 1
+--- !u!114 &-9074778074333302092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561215328616153577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b77a1f33a733104bbb02d3722d95ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 533c74bd0ba576e47859f2a96e5738b1, type: 3}
 --- !u!114 &759973499181517816
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class TurretsUi : MonoBehaviour
 			turretGunButton.InsufficientFund();
 			return;
 		}
-		constructionManager.SelectTurret(turretGun);
+		constructionManager.SelectBlueprint(turretGun);
 	}
 	
 	public void SelectTurretLauncher()
@@ -45,7 +45,7 @@ public class TurretsUi : MonoBehaviour
 			turretLauncherButton.InsufficientFund();
 			return;
 		}
-		constructionManager.SelectTurret(turretLauncher);
+		constructionManager.SelectBlueprint(turretLauncher);
 	}
 	
 	public void SelectTurretLaser()
@@ -55,7 +55,7 @@ public class TurretsUi : MonoBehaviour
 			turretLaserButton.InsufficientFund();
 			return;
 		}
-		constructionManager.SelectTurret(turretLaser);
+		constructionManager.SelectBlueprint(turretLaser);
 	}
 	
 	private void CheckMoneyCosts(float money)

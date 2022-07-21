@@ -7,9 +7,10 @@ public class ConstructionManager : MonoBehaviour
 	[SerializeField] private Player player;
 	[SerializeField] private uiTurret uiTurret;
 	[SerializeField] private NodeInteraction[] nodes;
+	[SerializeField] private List<Turret> turrets;
 	
-	private Dictionary<Node, GameObject> turrets;
-	private TurretRecord selection;
+	private List<Tuple<Node, Turret>> constructions;
+	private TurretRecord blueprint;
 	public Action<TurretRecord> OnInsufficientFund;
 	public Action<TurretRecord> OnSelectionChanged;
 	
@@ -20,27 +21,21 @@ public class ConstructionManager : MonoBehaviour
 	
 	private void Start()
 	{
-		turrets = new Dictionary<Node, GameObject>();
+		constructions = new List<Tuple<Node,Turret>>();
 		Array.ForEach(nodes, (node) => 
 		{
-			node.OnEnter += HighlightNode;
+			node.OnEnter += HighlightNodeForHover;
 			node.OnClicked += TryBuildTurret;
 		});
 	}
 	
-	private void HighlightNode(NodeInteraction nodeInteraction)
-	{
-		if(selection.Turret == null) return;
-		nodeInteraction.Highlight();
-	}
-	
 	private void TryBuildTurret(NodeInteraction nodeInteraction)
 	{
-		if(selection.Turret == null) return;
+		if(blueprint.Turret == null) return;
 		
-		if(player.HaveEnoughtMoney(selection.Cost) == false)
+		if(player.HaveEnoughtMoney(blueprint.Cost) == false)
 		{
-			OnInsufficientFund?.Invoke(selection);
+			OnInsufficientFund?.Invoke(blueprint);
 			return;
 		}
 		Node node = nodeInteraction.GetComponent<Node>();
@@ -50,29 +45,78 @@ public class ConstructionManager : MonoBehaviour
 			return;
 		}
 		
-		player.Buy(selection.Cost);
-		GameObject turret = selection.Turret.Init(node.Basement.position);
-		turrets.Add(node, turret);
+		player.Buy(blueprint.Cost);
+		BuildTurret(node, blueprint.Turret);
 	}
 	
-	public Turret GetSelectedTurret()
+	private void SelectTurret(TurretInteraction turretInteraction)
 	{
-		return selection.Turret;
+		Debug.Log("Select turret");
+		// open dialog box
 	}
 	
-	public void SelectTurret(TurretRecord turretRecord)
+	private Turret BuildTurret(Node node, Turret type)
 	{
-		selection = turretRecord;
-		OnSelectionChanged?.Invoke(turretRecord);
+		GameObject instance = type.Init(node.Basement.position);
+		
+		TurretInteraction turretInteraction = instance.GetComponent<TurretInteraction>();
+		turretInteraction.OnSelected += SelectTurret;
+		turretInteraction.OnEnter += HighlightNodeForSelect;
+		turretInteraction.OnEnter += HighlightTurretForSelect;
+		turretInteraction.OnExit += FadeNodeForSelect;
+		
+		Turret turret = instance.GetComponent<Turret>();
+		constructions.Add(new Tuple<Node, Turret>(node, turret));
+		turrets.Add(turret);
+		return turret;
 	}
 	
+	private void HighlightNodeForHover(NodeInteraction nodeInteraction)
+	{
+		if(blueprint.Turret == null) return;
+		Node node = nodeInteraction.GetComponent<Node>();
+		if(IsNodeEmpty(node) == false) return;
+		nodeInteraction.HighlightForHover();
+	}
+	
+	private void HighlightNodeForSelect(TurretInteraction turretInteraction)
+	{
+		Turret turret = turretInteraction.GetComponent<Turret>();
+		Node node = GetNodeForTurret(turret);
+		if(node == null) return;
+		NodeInteraction nodeInteraction = node.GetComponent<NodeInteraction>();
+		nodeInteraction.HighlightForSelect();
+	}
+	
+	private void FadeNodeForSelect(TurretInteraction turretInteraction)
+	{
+		Turret turret = turretInteraction.GetComponent<Turret>();
+		Node node = GetNodeForTurret(turret);
+		if(node == null) return;
+		turretInteraction.Fade();
+		NodeInteraction nodeInteraction = node.GetComponent<NodeInteraction>();
+		nodeInteraction.FadeToIdle();
+	}
+	
+	private void HighlightTurretForSelect(TurretInteraction turretInteraction)
+	{
+		turretInteraction.Highlight();
+	}
+
 	private bool IsNodeEmpty(Node node)
 	{
-		return turrets.ContainsKey(node) == false;
+		return constructions.Find(link => link.Item1 == node)?.Item2 == null;
 	}
 	
-	public bool IsTurretSelected()
+	private Node GetNodeForTurret(Turret turret)
 	{
-		return selection.Turret != null;
+		return constructions.Find(link => link.Item2 == turret).Item1;
 	}
+	
+	public void SelectBlueprint(TurretRecord turretRecord) // TODO refactor this to match naming changes
+	{
+		blueprint = turretRecord;
+		OnSelectionChanged?.Invoke(turretRecord); 
+	}
+	
 }

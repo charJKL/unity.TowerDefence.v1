@@ -338,9 +338,11 @@ GameObject:
   m_Component:
   - component: {fileID: 80568997569474511}
   - component: {fileID: 7645081906617687337}
+  - component: {fileID: 8289482584227647667}
   - component: {fileID: 759973499181517816}
   - component: {fileID: 2756980350554732563}
   - component: {fileID: 3914046213675350113}
+  - component: {fileID: 5452317821647091806}
   m_Layer: 0
   m_Name: TurretLaser
   m_TagString: Untagged
@@ -379,6 +381,19 @@ MonoBehaviour:
   range: 10
   shootingRate: 1
   shootingDuration: 3
+--- !u!114 &8289482584227647667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561215328616153577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b77a1f33a733104bbb02d3722d95ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 533c74bd0ba576e47859f2a96e5738b1, type: 3}
 --- !u!114 &759973499181517816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +433,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileBeam: {fileID: 825180147850480633, guid: 434755a6ec113ef41ad1c01d6e0ecf50, type: 3}
   barrel: {fileID: 7530392917683316165}
+--- !u!65 &5452317821647091806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561215328616153577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.47, z: 1}
+  m_Center: {x: 0, y: 0.69, z: 0}
 --- !u!1 &4853179843160738750
 GameObject:
   m_ObjectHideFlags: 0

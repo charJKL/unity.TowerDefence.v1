@@ -5,7 +5,8 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Node))]
 public class NodeInteraction : MonoBehaviour
 {
-	[SerializeField] private Material highlightMaterial;
+	[SerializeField] private Material hoverHighlightMaterial;
+	[SerializeField] private Material selectHighlightMaterial;
 	
 	private new Renderer renderer;
 	private Node node;
@@ -21,9 +22,19 @@ public class NodeInteraction : MonoBehaviour
 		idleMaterial = renderer.material;
 	}
 	
-	public void Highlight()
+	public void HighlightForHover()
 	{
-		renderer.material = highlightMaterial;
+		renderer.material = hoverHighlightMaterial;
+	}
+	
+	public void HighlightForSelect()
+	{
+		renderer.material = selectHighlightMaterial;
+	}
+	
+	public void FadeToIdle()
+	{
+		renderer.material = idleMaterial;
 	}
 	
 	private void OnMouseDown()
@@ -40,6 +51,6 @@ public class NodeInteraction : MonoBehaviour
 	
 	private void OnMouseExit()
 	{
-		renderer.material = idleMaterial;
+		FadeToIdle();
 	}
 }

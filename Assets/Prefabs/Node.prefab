@@ -44,8 +44,7 @@ GameObject:
   - component: {fileID: 6718762802470526313}
   - component: {fileID: 1310184477695631956}
   - component: {fileID: -1437613054537174204}
-  - component: {fileID: 4915695983250224105}
-  - component: {fileID: -2967640187098662968}
+  - component: {fileID: 4602637441903708366}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -144,32 +143,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d55b912b6a9fc4f9e11881d2f3561c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4915695983250224105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7150946095510750544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77aa6145dbd690146a5a29752f1ff505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  renderer: {fileID: 6718762802470526313}
-  hover: {fileID: 2100000, guid: 42311d5073f7f3e4f9732d909bd3e5f0, type: 2}
---- !u!114 &-2967640187098662968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7150946095510750544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 418d188d53d9f70438522474144c9918, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  construction: {fileID: 0}
   basement: {fileID: 2070959173721602936}
-  turret: {fileID: 7645081906617687337, guid: a9d55e11df7b0dc4290d7d18f6ccc0c9, type: 3}
+--- !u!114 &4602637441903708366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150946095510750544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3be003f23c2b5489aec7ba2eff5955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highlightMaterial: {fileID: 2100000, guid: 42311d5073f7f3e4f9732d909bd3e5f0, type: 2}
